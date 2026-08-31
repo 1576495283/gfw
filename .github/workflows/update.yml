@@ -1,0 +1,53 @@
+name: Update GFW Domain
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v4
+
+
+    - name: Download gfwlist
+      run: |
+        wget -O gfwlist.txt https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
+
+
+    - name: Convert to domain txt
+      run: |
+
+        # Base64解码
+        base64 -d gfwlist.txt > gfw-decoded.txt
+
+
+        # 提取域名
+        cat gfw-decoded.txt \
+        | grep -E "^\|\|" \
+        | sed 's/^||//' \
+        | sed 's/\^.*//' \
+        | sed 's/\/.*//' \
+        | sed 's/^\.*//' \
+        | grep -E "^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" \
+        | sort -u \
+        > gfw.txt
+
+
+
+    - name: Commit update
+      run: |
+
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+
+        git add gfw.txt
+
+        git commit -m "update gfw domain list" || exit 0
+
+        git push
