@@ -510,6 +510,7 @@ byrut.org
 c-est-simple.com
 c-span.org
 c-spanvideo.org
+c.go-mpulse.net
 c.mi.com
 c2cx.com
 c3pool.com
@@ -2789,6 +2790,7 @@ qiangwaikan.com
 qiangyou.org
 qianmo.tw
 qiwen.lu
+qobuz.com
 qoos.com
 qq.co.za
 qstatus.com
@@ -3599,6 +3601,7 @@ valeursactuelles.com
 vansky.com
 vaticannews.va
 vatn.org
+vava8.com
 vcf-online.org
 vcfbuilder.org
 veed.io
